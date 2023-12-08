@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.uiabrwm.mongodb.net/?retryWrites=true&w=majority`;
@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    //await client.connect();
+    await client.connect();
 
     // userCollection
     const database = client.db("productDB");
